@@ -1,0 +1,70 @@
+@import '/src/style/mixin.scss';
+
+input[type="button"] {
+    background: url(/src/img/Vector\ \(6\).svg) center left no-repeat;
+}
+.block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:45px;
+}
+.wrapperForItems {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.block__header_h {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $smokeColor;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.block__header__firstItem {
+    padding: 29px 260px 18px;
+    border-bottom: 5px solid $checkBox;
+}
+
+.block__header__secondItem {
+    background-color: $liteSmokeColor;
+    padding: 29px 260px 18px;
+}
+.block__input {
+    border: 1px solid $black;
+    border-radius: 25px;
+    overflow: hidden;
+    padding-left: 15px;
+    max-width: 1040px;
+    width: 100%;
+    background-color: $smokeColor;
+    form{
+        display: flex;
+        justify-content: space-between;
+    }
+}
+#postInput{
+    border: none;
+    outline:none;
+    width: 100%;
+    background-color: $smokeColor;
+}
+#postInput::placeholder{
+    font-size: 32px;
+    font-weight: bold;
+}
+#postBtn{
+    background-color: $btnColor;
+    font-weight: bold;
+    border: none;
+    font-size: 38px;
+    color: white;
+    cursor: pointer;
+}
+#postBtn:hover{
+    background-color: $hoverBtn;
+    color: $black;
+}

@@ -1,3 +1,5 @@
-html{
-  font-family: 'Forum', cursive;
-}
+@import 'style/var.scss';
+@import 'style/block.scss';
+@import 'style/zeroing.scss';
+@import 'style/mixin.scss';
+@import 'style/todoInf.scss';

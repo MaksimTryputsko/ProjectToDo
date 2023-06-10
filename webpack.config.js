@@ -15,8 +15,7 @@ module.exports = {
     rules: [
         {
           test: /\.html$/i,
-          loader: 'html-loader',
-          
+          loader: "html-loader",
         },
         {
          test: /\.js$/,
@@ -43,7 +42,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
         template: path.join(__dirname, 'src', 'template.html'),
-        filename: 'template.html',
+        // filename: 'helloWorld.html'
     }),
     new FileManagerPlugin({
         events: {
