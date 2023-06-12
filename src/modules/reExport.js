@@ -1,3 +1,2 @@
-export * from './first'
-export * from './second'
-export * from './third'
+export * from './methodPost'
+export * from './methodAllDelete'

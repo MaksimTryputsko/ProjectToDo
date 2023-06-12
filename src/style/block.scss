@@ -1,6 +1,4 @@
-@import '/src/style/mixin.scss';
-
-input[type="button"] {
+.deleteBtn {
     background: url(/src/img/Vector\ \(6\).svg) center left no-repeat;
 }
 .block {
@@ -15,7 +13,6 @@ input[type="button"] {
     align-items: center;
     width: 100%;
 }
-
 .block__header_h {
     display: flex;
     align-items: center;
@@ -41,30 +38,30 @@ input[type="button"] {
     max-width: 1040px;
     width: 100%;
     background-color: $smokeColor;
-    form{
+    form {
         display: flex;
         justify-content: space-between;
     }
 }
-#postInput{
+#postInput {
     border: none;
     outline:none;
     width: 100%;
     background-color: $smokeColor;
 }
-#postInput::placeholder{
+#postInput::placeholder {
     font-size: 32px;
     font-weight: bold;
 }
-#postBtn{
+#postBtn {
     background-color: $btnColor;
     font-weight: bold;
     border: none;
     font-size: 38px;
-    color: white;
+    color: $white;
     cursor: pointer;
 }
-#postBtn:hover{
+#postBtn:hover {
     background-color: $hoverBtn;
     color: $black;
 }

@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     gap: 75px;
-    li{
+    li {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -16,21 +16,17 @@
         border-bottom: 1px solid $liBorder;
         padding-top: 30px;
         padding-bottom: 30px;
-        // label{
-        //     color:$black;
-        //     font-weight: bold;
-        // }
     }
 }
-.deleteImg{
+.deleteImg {
     width: 20px;
     height: 25px;
     background-image: url(/src/img/Vector\ \(8\).svg);
     background-repeat: no-repeat;
     cursor: pointer;
 }
-.toDos{
-    input{
+.toDos {
+    input {
         position: absolute;
         z-index: -1;
         opacity: 0;
@@ -63,31 +59,27 @@
         background-size: 60px;
     }
 }
-
-
-.block__inf__toDos {
-}
 .block__inf_remote {
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
     padding-right: 100px;
 }
-.deleteBtn{
+.deleteBtn {
     border: none;
     cursor: pointer;
     font-size: 24px;
     font-weight: bold;
     color: $checkBox;
 }
-.deleteBtn:hover{
+.deleteBtn:hover {
     color: $gold;
 }
-.firstStyle{
+.firstStyle {
     color: $black;
     font-weight: bold;
 }
-.checked{
+.checked {
     text-decoration: line-through;
     color: $grayLight;
     font-weight: 600;
