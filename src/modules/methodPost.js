@@ -1,19 +1,38 @@
-const toDoList ='https://jsonplaceholder.typicode.com/todos'
+const URL_TODOS ='https://jsonplaceholder.typicode.com/todos'
 const ul = document.querySelector('.toDos');
 
-function sendRequestPost (method, url, body = null){
-    const headers = {
-        'Content-Type': 'application/json'
+export function sendRequest(method, url, bodyElement = null, itemId = '', value){
+    if (method = 'GET' || 'DELETE') {
+     return fetch(`${url}\ ${itemId}`, {
+             method: method, 
+           })
+           .then((response) => response.json())
+           .catch (err => console.log(`sorry problem with server, try later.`))
     }
-    return fetch(url, {
-        method: method,
-        body: JSON.stringify(body),
-        headers: headers
-    })
-    .then(response => {
-        return response.json()
-    })
-}
+
+    if (method = 'PATCH') {
+    return fetch(`https://jsonplaceholder.typicode.com/todos/${itemId}`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+            "completed": value
+        }),
+        headers: {
+           'Content-type': 'application/json; charset=UTF-8',
+        },
+        })
+    } else {
+      return fetch(url, {
+        method: method, 
+        body: JSON.stringify(bodyElement),
+         
+        headers: {
+         'Content-type': 'application/json; charset=UTF-8',
+        },
+   })
+     .then((response) => response.json())
+     .catch (err => console.log(`sorry problem with server, try later.`))
+    }
+ }
 
 document.querySelector('#postBtn').addEventListener('click', sendToDo)
 
@@ -32,64 +51,39 @@ const sendToServe = (valuePost) => {
         completed: false,
         title: valuePost,
     }
-    sendRequestPost ('POST', toDoList, body)
+    sendRequest ('POST', URL_TODOS, body)
     .then(
         criateLi(valuePost, id)
     )
-    .catch(err => console.log(`Error, try latter`)) 
 }
 
 const criateLi = (valuePost, id) => {
     const li = document.createElement('li')
     li.innerHTML = `<input id="${id}" type="checkbox"><label id="firstLabel" class="firstStyle" for="${id}">${valuePost}</label><div id="${id}" class="deleteImg"></div>`
     ul.prepend(li)
-    controleCheckBox()
-    controleImgDelete()
+    controlCheckBox()
+    controlImgDelete()
 }
 
-export function controleCheckBox () {
+export function controlCheckBox () {
     const label = document.querySelector('.firstStyle');
     const testCheckBox = document.querySelector('input[type="checkbox"]')
     testCheckBox.addEventListener('click', () => label.classList.toggle('checked'))
-    testCheckBox.addEventListener('change', () => {
-        if (label.className.includes('checked')) {
-            patch(true, testCheckBox.id)
-        } else {
-            patch(false, testCheckBox.id)
-        }
-    })
-}
-
-function checkValue () {
-    if (label.className.includes('checked')) {
-       return patch(true, testCheckBox.id)
-    } else {
-       return patch(false, testCheckBox.id)
-    }
+    testCheckBox.addEventListener('change', () => patch(label.className.includes('checked'), testCheckBox.id))
 }
 
 function patch (value, id) {
-    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
-        method: 'PATCH',
-        body: JSON.stringify({
-            "completed": value
-        }),
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-        },
-        })
-    .catch(err => console.log('Try latter, problem with serve'))
+    sendRequest('PATCH', URL_TODOS, id, '', value)
 }
 
-export function controleImgDelete () {
+export function controlImgDelete () {
     const deleteItem = document.querySelector('.deleteImg')
     deleteItem.addEventListener('click', deleteLi)
 }
 
 export function deleteLi () {
-    fetch(`https:jsonplaceholder.typicode.com/todos/${this.id}`, { method: 'DELETE' })
+    sendRequest('DELETE', URL_TODOS, this.id)
     .then(() => {
         this.parentNode.remove()
     })
-    .catch(err => 'Problem with serve, try latter')
 }

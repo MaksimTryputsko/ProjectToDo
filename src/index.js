@@ -1,31 +1,24 @@
 import './main.scss';
-import  { controleCheckBox, controleImgDelete }  from './modules/reExport'
+import  { controlCheckBox, controlImgDelete, sendRequest }  from './modules/reExport'
 
-const toDoList ='https://jsonplaceholder.typicode.com/todos'
+const URL_TODOS ='https://jsonplaceholder.typicode.com/todos'
 const ul = document.querySelector('.toDos');
 
-function controleChecked (completed) {
+function controlChecked (completed) {
     if (completed) {
         return "checked"
     } 
 }
 
-function sendRequest (method, url) {
-    return fetch(url).then(resopnse => {
-        return resopnse.json()
-    })
-}
-
-sendRequest('GET', toDoList)
+sendRequest('GET', URL_TODOS)
     .then(data => {
-            data.splice(10, data.length - 1)
-            data.forEach( function({completed,id,title,userId}) {
-                            const li = document.createElement('li')
-                            li.innerHTML = `<input id="${id}" type="checkbox" ${controleChecked(completed)}><label class="firstStyle ${controleChecked(completed)}" for="${id}">${title}</label><div id=${id} class="deleteImg"></div>`
-                            ul.prepend(li) 
+        data.splice(10, data.length - 1)
+        data.forEach( function({completed,id,title,userId}) {
+            const li = document.createElement('li')
+            li.innerHTML = `<input id="${id}" type="checkbox" ${controlChecked(completed)}><label class="firstStyle ${controlChecked(completed)}" for="${id}">${title}</label><div id=${id} class="deleteImg"></div>`
+            ul.prepend(li) 
 
-                            controleCheckBox()
-                            controleImgDelete()
+            controlCheckBox()
+            controlImgDelete()
             })            
     })
-    .catch(err => `Sorry problem with serve`)
