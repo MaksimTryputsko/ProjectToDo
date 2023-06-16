@@ -1,39 +1,17 @@
 import { createLi } from "./createToDo";
 
-const URL_TODOS ='https://jsonplaceholder.typicode.com/todos'
+export const URL ='https://jsonplaceholder.typicode.com/'
 
-export function sendRequest(method, itemId = '',  bodyElement = null, value){
-    if (method = 'GET' || 'DELETE') {
-     return fetch(`${URL_TODOS}/${itemId}`, {
-             method: method, 
-           })
-           .then((response) => response.json())
-           .catch (err => console.log(`sorry problem with server, try later.`))
-    }
-
-    if (method = 'PATCH') {
-    return fetch(`https://jsonplaceholder.typicode.com/todos/${itemId}`, {
-        method: method,
-        body: JSON.stringify({
-            "completed": value
-        }),
-        headers: {
-           'Content-type': 'application/json; charset=UTF-8',
-        },
-        })
-    } else {
-      return fetch(URL_TODOS, {
-        method: method, 
-        body: JSON.stringify(bodyElement),
-         
-        headers: {
-         'Content-type': 'application/json; charset=UTF-8',
-        },
-   })
-     .then((response) => response.json())
-     .catch (err => console.log(`sorry problem with server, try later.`))
-    }
- }
+export function sendRequest (method, url, path, body = null) {
+    const bodyControle = body ? JSON.stringify(body) : undefined
+    return fetch(`${url}${path}`, {
+        method,
+        budy: bodyControle,
+        headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    })
+    .then((response) => response.json())
+    .catch (err => console.log(`sorry problem with server, try later.`))
+}
 
 document.querySelector('#postBtn').addEventListener('click', sendToDo)
 
@@ -53,7 +31,7 @@ const sendToServer = (valuePost, id) => {
         completed: false,
         title: valuePost,
     }
-    sendRequest ('POST', '', body)
+    sendRequest ('POST', URL, 'todos', body)
     .then(() => {
         createLi(valuePost, id) 
     })
