@@ -5,8 +5,8 @@ export function controlImgDelete () {
     deleteItem.addEventListener('click', deleteLi)
 }
 
-function deleteLi () {
-    sendRequest('DELETE', this.id)
+function deleteLi (event) {
+    sendRequest('DELETE', `todos/${event.target.id}`)
     .then(() => {
         this.parentNode.remove()
     })

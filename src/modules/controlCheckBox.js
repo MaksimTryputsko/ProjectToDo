@@ -1,4 +1,4 @@
-import { sendRequest, URL } from "./postToDo";
+import { sendRequest } from "./postToDo";
 
 export function controlCheckBox () {
     const label = document.querySelector('.firstStyle');
@@ -8,5 +8,5 @@ export function controlCheckBox () {
 }
 
 function patch (value, id) {
-    sendRequest('PATCH', URL, `todos/${id}`, { completed: value })
+    sendRequest('PATCH', `todos/${id}`, { completed: value })
 }

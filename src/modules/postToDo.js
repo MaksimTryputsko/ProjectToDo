@@ -1,12 +1,12 @@
 import { createLi } from "./createToDo";
 
-export const URL ='https://jsonplaceholder.typicode.com/'
+const URL ='https://jsonplaceholder.typicode.com/'
 
-export function sendRequest (method, url, path, body = null) {
-    const bodyControle = body ? JSON.stringify(body) : undefined
-    return fetch(`${url}${path}`, {
+export function sendRequest (method, path, body = null) {
+    const bodyControl = body ? JSON.stringify(body) : undefined
+    return fetch(`${URL}${path}`, {
         method,
-        budy: bodyControle,
+        budy: bodyControl,
         headers: { 'Content-type': 'application/json; charset=UTF-8' },
     })
     .then((response) => response.json())
@@ -31,7 +31,7 @@ const sendToServer = (valuePost, id) => {
         completed: false,
         title: valuePost,
     }
-    sendRequest ('POST', URL, 'todos', body)
+    sendRequest ('POST', 'todos', body)
     .then(() => {
         createLi(valuePost, id) 
     })

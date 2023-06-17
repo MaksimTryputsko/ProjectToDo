@@ -1,15 +1,13 @@
 import './main.scss';
-import  { sendRequest, createLi, URL }  from './modules/reExport'
+import  { sendRequest, createLi }  from './modules/reExport'
 
-sendRequest('GET', URL, "todos")
+sendRequest('GET', "todos")
     .then(data => {
         const elements = data.slice(0,10)
         elements.forEach(
-          item => destructuringAndCreate(item)
+          item => {
+            const {completed, id, title, userId} = item
+            createLi(title, id, completed, userId)
+          }
         )            
     })
-
-function destructuringAndCreate (item) {
-        let {completed, id, title, userId} = item
-        createLi(title, id, completed, userId)
-}
