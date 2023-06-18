@@ -1,19 +1,19 @@
-import { controlCheckBox } from "./controlCheckBox";
-import { controlImgDelete } from "./deleteOneToDo";
-
-function controlChecked (completed) {
-     if (completed) {
-         return "checked"
-     } 
+"use strict";
+exports.__esModule = true;
+exports.createLi = void 0;
+var controlCheckBox_1 = require("./controlCheckBox");
+var deleteOneToDo_1 = require("./deleteOneToDo");
+function controlChecked(completed) {
+    if (completed) {
+        return "checked";
+    }
 }
-
-export function createLi (title,id,completed,userId) {
-    const li = document.createElement('li')
-    const ul = document.querySelector('.toDos');
-    li.innerHTML = `<input id="${id}" class="checkBoxToDo" type="checkbox" ${controlChecked(completed)}><label class="firstStyle ${controlChecked(completed)}" for="${id}">${title}</label><div id=${id} class="deleteImg"></div>`
-    ul.prepend(li)
-    controlCheckBox()
-    controlImgDelete()
+function createLi(title, id, completed, userId) {
+    var li = document.createElement('li');
+    var ul = document.querySelector('.toDos');
+    li.innerHTML = "<input id=\"".concat(id, "\" class=\"checkBoxToDo\" type=\"checkbox\" ").concat(controlChecked(completed), "><label class=\"firstStyle ").concat(controlChecked(completed), "\" for=\"").concat(id, "\">").concat(title, "</label><div id=").concat(id, " class=\"deleteImg\"></div>");
+    ul.prepend(li);
+    (0, controlCheckBox_1.controlCheckBox)();
+    (0, deleteOneToDo_1.controlImgDelete)();
 }
-
-
+exports.createLi = createLi;
