@@ -1,19 +1,9 @@
 import { createLi } from "./createToDo";
-
+import { Item } from '../index';
 const URL: string ='https://jsonplaceholder.typicode.com/'
 
-interface Body<A, B> {
-    userId?: number,
-    completed: A,
-    title?: B,
-}
-interface TEST <A, B, C>{
-    completed?: A,
-    id: B,
-    title: C,
-    userId: B,
-}
-export function sendRequest<TEST> (method: string, path: string, body?: Body<boolean, string> | null): Promise<TEST> {
+
+export function sendRequest<RESULT, BODY> (method: string, path: string, body?: BODY | null): Promise<RESULT> {
     const bodyControl: string | undefined = body ? JSON.stringify(body) : undefined
     return fetch(`${URL}${path}`, {
         method,
@@ -24,26 +14,29 @@ export function sendRequest<TEST> (method: string, path: string, body?: Body<boo
     .catch (err => console.log(`sorry problem with server, try later.`))
 }
 
-const postBtn = document.querySelector('#postBtn') as HTMLInputElement
-postBtn.addEventListener('click', sendToDo) 
-
 let id: number = 11;
 
-function sendToDo (): number {
-    const valuePostElement = document.querySelector('#postInput') as HTMLInputElement
-    const valuePost: string = valuePostElement.value
+export function sendToDo (): number {
+    const valuePostElement : HTMLInputElement | null = document.querySelector('#postInput')
+    const valuePost: string  = valuePostElement!.value
     sendToServer(valuePost, id);
     id++
     return id
 }
 
+interface Body {
+    userId?: number,
+    completed: boolean,
+    title?: string,
+}
+
 const sendToServer = (valuePost: string, id: number): void => {
-    const body: Body<boolean, string> = {
+    const body = {
         userId: 1,
         completed: false,
         title: valuePost,
     }
-    sendRequest ('POST', 'todos', body)
+    sendRequest<Item, Body> ('POST', 'todos', body)
     .then(() => {
         createLi(valuePost, id, false) 
     })

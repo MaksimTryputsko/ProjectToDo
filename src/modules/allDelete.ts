@@ -1,14 +1,11 @@
 import { sendRequest } from './postToDo';
+import { Item } from '../index';
 
-const deleteAllBtn = document.querySelector('.deleteBtn') as HTMLInputElement
-deleteAllBtn.addEventListener('click', allDelete)
-
-function allDelete (): void {
-    const liItems = document.querySelectorAll('.checkBoxToDo') as NodeListOf<HTMLInputElement>
-    console.log(liItems)
+export function allDelete (): void {
+    const liItems : NodeListOf<HTMLInputElement> = document.querySelectorAll('.checkBoxToDo')
     liItems.forEach( (item): void => { 
         if(item.checked) {
-            sendRequest ('DELETE', `todos/${item.id}`)
+            sendRequest <Item, void>('DELETE', `todos/${item.id}`)
          .then(() => {
                 item?.parentElement?.remove()
             }
