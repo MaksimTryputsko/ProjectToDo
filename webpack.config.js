@@ -12,11 +12,18 @@ module.exports = {
     assetModuleFilename: path.join('images', '[name].[contenthash][ext]'),
   },
   resolve: {
-    extensions: ["", ".webpack.js", ".web.js", ".tsx", ".js"],
+    extensions: ["",".webpack.js",".ts",".web.js",".tsx",".js"],
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
-      { test: /\.tsx?$/, loader: "ts-loader" },
+        { test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+        },
         {
           test: /\.html$/i,
           loader: "html-loader",
@@ -80,5 +87,4 @@ module.exports = {
         }),
       ],
   },
-  
 };

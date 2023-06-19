@@ -6,10 +6,9 @@ export function controlImgDelete (): void {
 }
 
 function deleteLi (event : Event): void {
-
-    sendRequest('DELETE', `todos/${(event.target as HTMLDivElement).id}`)
+    const target = event.target as HTMLDivElement
+    sendRequest('DELETE', `todos/${target.id}`)
     .then(() => {
-        (event.target as HTMLDivElement)?.parentNode?.remove()
-        // this.parentNode.remove()
+        target.parentElement?.remove()
     })
 }

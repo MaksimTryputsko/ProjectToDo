@@ -2,20 +2,18 @@ import { createLi } from "./createToDo";
 
 const URL: string ='https://jsonplaceholder.typicode.com/'
 
-type Body = {
+interface Body<A, B> {
     userId?: number,
-    completed: boolean,
-    title?: string
+    completed: A,
+    title?: B,
 }
-
-interface Response {
-    completed: boolean,
-    id: number,
-    title: string,
-    userId: number,
+interface TEST <A, B, C>{
+    completed?: A,
+    id: B,
+    title: C,
+    userId: B,
 }
-
-export function sendRequest<Response> (method: string, path: string, body?: Body | null): Promise<Response> {
+export function sendRequest<TEST> (method: string, path: string, body?: Body<boolean, string> | null): Promise<TEST> {
     const bodyControl: string | undefined = body ? JSON.stringify(body) : undefined
     return fetch(`${URL}${path}`, {
         method,
@@ -40,7 +38,7 @@ function sendToDo (): number {
 }
 
 const sendToServer = (valuePost: string, id: number): void => {
-    const body: Body = {
+    const body: Body<boolean, string> = {
         userId: 1,
         completed: false,
         title: valuePost,

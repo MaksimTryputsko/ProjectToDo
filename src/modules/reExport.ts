@@ -1,5 +1,0 @@
-export * from './postToDo'
-export * from './methodAllDelete'
-export * from './createToDo'
-export * from './controlCheckBox'
-export * from './deleteOneToDo'

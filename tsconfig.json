@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
-    "sourceMap": true,   
+    "sourceMap": true,
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "jsx": "react",
+    "allowJs": true,
+    "moduleResolution": "node", 
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
     /* Projects */
