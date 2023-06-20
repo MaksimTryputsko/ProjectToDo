@@ -5,14 +5,25 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = {
-  entry: path.join(__dirname, 'src', 'index.js'),
+  entry: path.join(__dirname, 'src', 'index.ts'),
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'index.[contenthash].js',
     assetModuleFilename: path.join('images', '[name].[contenthash][ext]'),
   },
+  resolve: {
+    extensions: ["",".webpack.js",".ts",".web.js",".tsx",".js"],
+  },
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
   module: {
     rules: [
+        { test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+        },
         {
           test: /\.html$/i,
           loader: "html-loader",
@@ -42,7 +53,6 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
         template: path.join(__dirname, 'src', 'template.html'),
-        // filename: 'helloWorld.html'
     }),
     new FileManagerPlugin({
         events: {
@@ -77,5 +87,4 @@ module.exports = {
         }),
       ],
   },
-  
 };
