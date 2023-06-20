@@ -1,11 +1,11 @@
-import { sendRequest } from './postToDo';
-import { Item } from '../index';
+import { sendRequest } from './sendRequest';
+import { TodoModel } from './toDoModel';
 
 export function allDelete (): void {
-    const liItems : NodeListOf<HTMLInputElement> = document.querySelectorAll('.checkBoxToDo')
+    const liItems: NodeListOf<HTMLInputElement> = document.querySelectorAll('.checkBoxToDo')
     liItems.forEach( (item): void => { 
         if(item.checked) {
-            sendRequest <Item, void>('DELETE', `todos/${item.id}`)
+            sendRequest <TodoModel, void>('DELETE', `todos/${item.id}`)
          .then(() => {
                 item?.parentElement?.remove()
             }
